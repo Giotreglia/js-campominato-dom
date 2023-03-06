@@ -34,6 +34,7 @@ playButtonDom.addEventListener('click',
         score = 0;
         mainDom.removeAttribute("style");
 
+
         // Definizione livello difficoltà
 
         const levelDom = document.getElementById("level").value;
@@ -47,8 +48,7 @@ playButtonDom.addEventListener('click',
             gridCells = difficile;
         }       
 
-        let rowCells = Math.sqrt(gridCells);
-        
+        let rowCells = Math.sqrt(gridCells);       
 
 
         // Genero lista bombe
@@ -83,27 +83,34 @@ playButtonDom.addEventListener('click',
             // Aggiunta evento al clic
             currentSquare.addEventListener('click',
                 function () {
-                    this.classList.toggle('clicked');
-
+                    this.classList.add('clicked');
+                    
                     // Conteggio click punteggio
                     score += 1;
+                    currentSquare.style.pointerEvents = 'none';
                     scoreDom.innerHTML = `Il tuo punteggio è: ${score}`;
 
+                            // Definisco numero massimo caselle per vittoria
+                    let numeroVittoria = gridCells - 16;
+                    console.log(numeroVittoria);
+                    
                     if (isBomb) {
                         scoreDom.innerHTML += `, Hai Perso!`;
                         mainDom.style.pointerEvents = 'none';    
-                        for (let i = 0; i < bombsList.length; i++) {
-                            bombsList[i].classList.remove('clicked');
-                            bombsList[i].classList.add('lose');
-                        }                    
-                    }
+                        showBombs(bombsList);
 
+                    } else if (score == numeroVittoria) {
+                        scoreDom.innerHTML += `, Complmenti! Hai vinto!`;
+                        alert('Complimenti! Hai vinto!')
+                        mainDom.style.pointerEvents = 'none';
+                        showBombs(bombsList);
+                    }
 
                 }               
             )
             squaresContainerDom.append(currentSquare);
         }    
-        console.log(bombsList);
+        
     })
 
 
@@ -139,6 +146,14 @@ function uniqueRandomNumberGenerator(blacklist, min, max) {
         }
     }
     return numeroRandom;
+}
+
+// Funzione mostra bombe
+function showBombs(bombsList) {
+    for (let i = 0; i < bombsList.length; i++) {
+        bombsList[i].classList.remove('clicked');
+        bombsList[i].classList.add('lose');
+    }   
 }
 
 
