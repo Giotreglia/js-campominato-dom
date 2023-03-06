@@ -55,12 +55,14 @@ playButtonDom.addEventListener('click',
 
         let bombArray = [];
         let blacklist = [];
+        let bombsList = [];
 
         for (let i = 0; i < 16; i++) {
 
             const numeroRandomUnico = uniqueRandomNumberGenerator(blacklist, 1, gridCells);
             blacklist.push(numeroRandomUnico);
             bombArray.push(numeroRandomUnico);
+            
         }
 
         // Creo griglia compresa di caselle bomba
@@ -73,7 +75,9 @@ playButtonDom.addEventListener('click',
             // Definisco caselle bomba
             if (isBomb) {
                 currentSquare.classList.add('bomb');  
+                bombsList.push(currentSquare);
             }
+            
 
             
             // Aggiunta evento al clic
@@ -87,12 +91,19 @@ playButtonDom.addEventListener('click',
 
                     if (isBomb) {
                         scoreDom.innerHTML += `, Hai Perso!`;
-                        mainDom.style.pointerEvents = 'none';                        
+                        mainDom.style.pointerEvents = 'none';    
+                        for (let i = 0; i < bombsList.length; i++) {
+                            bombsList[i].classList.remove('clicked');
+                            bombsList[i].classList.add('lose');
+                        }                    
                     }
+
+
                 }               
             )
             squaresContainerDom.append(currentSquare);
         }    
+        console.log(bombsList);
     })
 
 

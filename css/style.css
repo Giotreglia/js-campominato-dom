@@ -93,8 +93,9 @@ main {
     top: 50%;
     transform: translate(-50%, -50%);
     font-weight: bold;
-    font-size: 1rem;
+    font-size: 1.3rem;
     color: rgb(1, 21, 51);
+    text-align: center;
 }
 
 .square {
@@ -110,13 +111,15 @@ main {
     color: white;
 }
 
-.square.clicked.bomb {
+.square.clicked.bomb, .lose.bomb {
     background-color: rgba(255, 0, 0, 0.644);
     background-image: url('https://www.pngall.com/wp-content/uploads/5/Blank-Comic-Boom-PNG-Download-Image.png');
     background-size: contain;
     background-position: center;
     background-repeat: no-repeat;
 }
+
+
 
 #score {
     position: absolute;
