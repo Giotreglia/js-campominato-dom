@@ -29,6 +29,8 @@ playButtonDom.addEventListener('click',
 
         // Reset quadro
         squaresContainerDom.innerHTML = "";
+        scoreDom.innerHTML = "";
+        score = 0;
 
         // Definizione livello difficoltà
 
