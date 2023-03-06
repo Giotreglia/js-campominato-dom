@@ -14,6 +14,7 @@
 const playButtonDom = document.getElementById("play"); 
 const squaresContainerDom = document.querySelector(".squares-container");
 const scoreDom = document.getElementById('score');
+const mainDom = document.querySelector('main');
 
  //Livelli
  
@@ -31,6 +32,7 @@ playButtonDom.addEventListener('click',
         squaresContainerDom.innerHTML = "";
         scoreDom.innerHTML = "";
         score = 0;
+        mainDom.style.removeProperty("pointerEvents");
 
         // Definizione livello difficoltà
 
@@ -59,7 +61,6 @@ playButtonDom.addEventListener('click',
             const numeroRandomUnico = uniqueRandomNumberGenerator(blacklist, 1, gridCells);
             blacklist.push(numeroRandomUnico);
             bombArray.push(numeroRandomUnico);
-
         }
 
         // Creo griglia compresa di caselle bomba
@@ -73,14 +74,20 @@ playButtonDom.addEventListener('click',
             if (isBomb) {
                 currentSquare.classList.add('bomb');  
             }
+
             
             // Aggiunta evento al clic
             currentSquare.addEventListener('click',
                 function () {
                     this.classList.toggle('clicked');
-                    console.log(i);
+
+                    // Conteggio click punteggio
+                    score += 1;
+                    scoreDom.innerHTML = `Il tuo punteggio è: ${score}`;
+
                     if (isBomb) {
                         scoreDom.innerHTML += `, Hai Perso!`;
+                        mainDom.style.pointerEvents = 'none';                        
                     }
                 }               
             )
@@ -95,9 +102,6 @@ playButtonDom.addEventListener('click',
 // Funzione per creare square
 function createNewSquare(content, rowCells) {
     const currentSquare = document.createElement("div");
-    const onclick = document.createAttribute("onclick");
-    onclick.value = "clickCounter()";
-    currentSquare.setAttributeNode(onclick);
     currentSquare.classList.add('square');
     currentSquare.style.width = `calc((var(--main-height) - 100px) / ${rowCells})`;
     currentSquare.style.height = `calc((var(--main-height) - 100px) / ${rowCells})`;
@@ -126,12 +130,6 @@ function uniqueRandomNumberGenerator(blacklist, min, max) {
     return numeroRandom;
 }
 
-// Funzione per conteggio click punteggio
-
-function clickCounter() {
-    score +=1;
-    scoreDom.innerHTML = `Il tuo punteggio è: ${score}`;
-}
 
 
 
