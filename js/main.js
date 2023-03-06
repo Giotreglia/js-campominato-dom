@@ -79,6 +79,9 @@ playButtonDom.addEventListener('click',
                 function () {
                     this.classList.toggle('clicked');
                     console.log(i);
+                    if (isBomb) {
+                        scoreDom.innerHTML += `, Hai Perso!`;
+                    }
                 }               
             )
             squaresContainerDom.append(currentSquare);
@@ -124,7 +127,7 @@ function uniqueRandomNumberGenerator(blacklist, min, max) {
 }
 
 // Funzione per conteggio click punteggio
-let score = 0;
+
 function clickCounter() {
     score +=1;
     scoreDom.innerHTML = `Il tuo punteggio è: ${score}`;
