@@ -32,7 +32,7 @@ playButtonDom.addEventListener('click',
         squaresContainerDom.innerHTML = "";
         scoreDom.innerHTML = "";
         score = 0;
-        mainDom.style.removeProperty("pointerEvents");
+        mainDom.removeAttribute("style");
 
         // Definizione livello difficoltà
 
