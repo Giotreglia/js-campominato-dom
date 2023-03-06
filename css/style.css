@@ -109,6 +109,10 @@ main {
     color: white;
 }
 
+.square.clicked.bomb {
+    background-color: rgba(255, 0, 0, 0.589);
+}
+
 
 /* Footer */
 

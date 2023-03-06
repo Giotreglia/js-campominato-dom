@@ -43,13 +43,33 @@ playButtonDom.addEventListener('click',
         }       
 
         let rowCells = Math.sqrt(gridCells);
-        console.log(rowCells);
         
+
+
+        // Genero lista bombe
+
+        let bombArray = [];
+        let blacklist = [];
+
+        for (let i = 0; i < 16; i++) {
+
+            const numeroRandomUnico = uniqueRandomNumberGenerator(blacklist, 1, 100);
+            blacklist.push(numeroRandomUnico);
+            bombArray.push(numeroRandomUnico);
+
+        }
+
         // Creo griglia
 
         for (let i = 1; i <= gridCells; i++) {
             
             const currentSquare = createNewSquare(i, rowCells);
+            if (bombArray.includes(parseInt(currentSquare.innerText))) {
+                currentSquare.classList.add('bomb');
+                
+            }
+
+            console.log(currentSquare);
             
             currentSquare.addEventListener('click',
                 function() {
@@ -57,23 +77,50 @@ playButtonDom.addEventListener('click',
                     console.log(i);
                 }
             )
-            
+
             squaresContainerDom.append(currentSquare);
         } 
+        
+
     })
 
 
 
 // FUNZIONI
 
+// Funzione per creare square
 function createNewSquare(content, rowCells) {
     const currentSquare = document.createElement("div");
     currentSquare.classList.add('square');
     currentSquare.style.width = `calc((var(--main-height) - 100px) / ${rowCells})`;
     currentSquare.style.height = `calc((var(--main-height) - 100px) / ${rowCells})`;
     currentSquare.innerHTML = content;
+
     return currentSquare;
 }
+
+// Funzione per creare numero random
+function randomNumberGenerator(min, max) {
+    number = Math.floor(Math.random() * (max - min + 1)) + min;
+    return number;
+}
+
+// Funzione per creare numero random unico
+function uniqueRandomNumberGenerator(blacklist, min, max) {
+    let isValidNumber = false;
+    let numeroRandom;
+
+    while (!isValidNumber) {
+        numeroRandom = randomNumberGenerator(min, max);
+        if (!blacklist.includes(numeroRandom)) {
+            isValidNumber = true;
+        }
+    }
+    return numeroRandom;
+}
+
+
+
 
 
 
