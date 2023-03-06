@@ -104,21 +104,6 @@ main {
     transition: all 0.1s;
 }
 
-.easy {
-    width: calc((var(--main-height) - 100px) / 10);
-    height: calc((var(--main-height) - 100px) / 10);
-}
-
-.medium {
-    width: calc((var(--main-height) - 100px) / 9);
-    height: calc((var(--main-height) - 100px) / 9);
-}
-
-.hard {
-    width: calc((var(--main-height) - 100px) / 7);
-    height: calc((var(--main-height) - 100px) / 7);
-}
-
 .clicked {
     background-color: rgb(1, 21, 51);
     color: white;

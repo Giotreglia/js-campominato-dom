@@ -41,20 +41,15 @@ playButtonDom.addEventListener('click',
         } else if (levelDom == "difficile") {
             gridCells = difficile;
         }       
+
+        let rowCells = Math.sqrt(gridCells);
+        console.log(rowCells);
         
         // Creo griglia
 
         for (let i = 1; i <= gridCells; i++) {
             
-            const currentSquare = createNewSquare(i);
-
-            if (gridCells == facile) {
-                currentSquare.classList.add('easy');
-            } else if (gridCells == medio) {
-                currentSquare.classList.add('medium');
-            } else if (gridCells == difficile) {
-                currentSquare.classList.add('hard');
-            }
+            const currentSquare = createNewSquare(i, rowCells);
             
             currentSquare.addEventListener('click',
                 function() {
@@ -62,21 +57,20 @@ playButtonDom.addEventListener('click',
                     console.log(i);
                 }
             )
-
-            squaresContainerDom.append(currentSquare);
             
+            squaresContainerDom.append(currentSquare);
         } 
-        
     })
 
 
 
 // FUNZIONI
 
-function createNewSquare(content) {
+function createNewSquare(content, rowCells) {
     const currentSquare = document.createElement("div");
     currentSquare.classList.add('square');
-    //currentSquare.style.width = `calc((var(--main-height) - 100px) / ${rowCells})`
+    currentSquare.style.width = `calc((var(--main-height) - 100px) / ${rowCells})`;
+    currentSquare.style.height = `calc((var(--main-height) - 100px) / ${rowCells})`;
     currentSquare.innerHTML = content;
     return currentSquare;
 }
